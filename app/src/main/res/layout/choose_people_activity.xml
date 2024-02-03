@@ -5,14 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    tools:context=".DisplayMessageActivity">
+    tools:context=".ChoosePeopleActivity">
 
 
     <TextView
-        android:id="@+id/message_display_text_view"
+        android:id="@+id/choose_people_tv"
         android:text="Second Activity!"
         android:textSize="75sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
     />
 </androidx.constraintlayout.widget.ConstraintLayout>

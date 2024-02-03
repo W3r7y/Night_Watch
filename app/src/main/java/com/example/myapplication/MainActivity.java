@@ -6,6 +6,7 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -13,7 +14,8 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String MESSAGE_KEY = "com.example.myapplication.MESSAGE";
+    public static final String TIME1_KEY = "com.example.myapplication.TIME1";
+    public static final String TIME2_KEY = "com.example.myapplication.TIME2";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,11 +25,15 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void buttonClick(View view) {
-        //EditText editText = (EditText) findViewById(R.id.edit_text);
-        //String message = editText.getText().toString();
+        TextView tv1 = (TextView) findViewById(R.id.tvForTime1);
+        TextView tv2 = (TextView) findViewById(R.id.tvForTime2);
+
+        String startingTime = tv1.getText().toString();
+        String endingTime = tv2.getText().toString();
 
         Intent intent = new Intent(this, ChoosePeopleActivity.class);
-        // intent.putExtra(MESSAGE_KEY, message);
+        intent.putExtra(TIME1_KEY, startingTime);
+        intent.putExtra(TIME2_KEY, endingTime);
         startActivity(intent);
     }
 

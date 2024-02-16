@@ -21,9 +21,9 @@ import java.util.Date;
 
 public class ChoosePeopleActivity extends AppCompatActivity {
 
-    ListView listView;
-    ArrayList<String> names;
-    ArrayAdapter<String> adapter;
+    static ListView listView;
+    static ArrayList<String> names;
+    static ListViewAdapter adapter;
     EditText input;
     ImageView add;
 
@@ -44,7 +44,7 @@ public class ChoosePeopleActivity extends AppCompatActivity {
         add = findViewById(R.id.add);
 
         names = new ArrayList<>();
-        adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, names);
+        adapter = new ListViewAdapter(getApplicationContext(), names);
         listView.setAdapter(adapter);
 
 
@@ -91,6 +91,11 @@ public class ChoosePeopleActivity extends AppCompatActivity {
     public void addName(String name){
         names.add(name);
         listView.setAdapter(adapter);
+    }
+
+    public static void removeName(int index){
+        names.remove(index);
+        adapter.notifyDataSetChanged();
     }
     Toast t;
     private void makeToast(String s){

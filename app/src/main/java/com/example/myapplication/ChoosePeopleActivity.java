@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -21,23 +22,30 @@ import java.util.Date;
 
 public class ChoosePeopleActivity extends AppCompatActivity {
 
+    public static final String NAMES_KEY = "com.example.myapplication.NAMES";
+    public static final String TIME1_KEY = "com.example.myapplication.TIME1";
+    public static final String TIME2_KEY = "com.example.myapplication.TIME2";
+
     static ListView listView;
     static ArrayList<String> names;
     static ListViewAdapter adapter;
+    static String startingTime;
+    static String endingTime;
     EditText input;
     ImageView add;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.choose_people_activity);
 
         Intent intent = getIntent();
-        String time1 = intent.getStringExtra(MainActivity.TIME1_KEY);
-        String time2 = intent.getStringExtra(MainActivity.TIME2_KEY);
+        startingTime = intent.getStringExtra(MainActivity.TIME1_KEY);
+        endingTime = intent.getStringExtra(MainActivity.TIME2_KEY);
 
         TextView textView = (TextView) findViewById(R.id.time_difference_tv);
-        textView.setText("Total time: " + calculateDifferenceBetweenTime(time1, time2));
+        textView.setText("Total time: " + TimeUtils.calculateDifferenceBetweenTime(startingTime, endingTime));
 
         listView = findViewById(R.id.list_view);
         input = findViewById(R.id.input);
@@ -46,8 +54,6 @@ public class ChoosePeopleActivity extends AppCompatActivity {
         names = new ArrayList<>();
         adapter = new ListViewAdapter(getApplicationContext(), names);
         listView.setAdapter(adapter);
-
-
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,8 +101,9 @@ public class ChoosePeopleActivity extends AppCompatActivity {
 
     public static void removeName(int index){
         names.remove(index);
-        adapter.notifyDataSetChanged();
+        listView.setAdapter(adapter);
     }
+
     Toast t;
     private void makeToast(String s){
         if (t != null) {
@@ -106,48 +113,13 @@ public class ChoosePeopleActivity extends AppCompatActivity {
         t.show();
     }
 
-    public String calculateDifferenceBetweenTime(String t1, String t2){
-        SimpleDateFormat format = new SimpleDateFormat("HH:mm");
-        try {
-            Date time1 = format.parse(t1);
-            Date time2 = format.parse(t2);
+    public void clickCalculateShifts(View view){
 
-            // Calculate the difference in milliseconds
-            long differenceMillis = time2.getTime() - time1.getTime();
-
-            // Handle differences across midnight
-            if (differenceMillis < 0) {
-                differenceMillis += 24 * 60 * 60 * 1000; // Add 24 hours
-            }
-
-            // Convert milliseconds to hours and minutes
-            long hours = differenceMillis / (60 * 60 * 1000);
-            long minutes = (differenceMillis / (60 * 1000)) % 60;
-
-            // Format the result as "HH:mm"
-            return String.format("%02d:%02d", hours, minutes);
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return "Invalid time format";
-        }
-    }
-
-    public int calculateShiftTimeInMinnutes(String totalTime, int people){
-        SimpleDateFormat format = new SimpleDateFormat("HH:mm");
-        try{
-            Date time = format.parse(totalTime);
-            int minutes_per_shift = 0;
-
-            long minutes = time.getTime() / (60 * 1000);
-            minutes_per_shift = (int) minutes / people;
-
-            return minutes_per_shift;
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return 0;
-        }
+        Intent intent = new Intent(this, CalculateShiftsActivity.class);
+        intent.putExtra(TIME1_KEY, startingTime);
+        intent.putExtra(TIME2_KEY, endingTime);
+        intent.putExtra(NAMES_KEY, names);
+        startActivity(intent);
 
     }
 

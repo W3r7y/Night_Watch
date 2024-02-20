@@ -48,6 +48,43 @@ public class TimeUtils {
         }
     }
 
+
+    public static String addMinutesToTime(String receivedTime, int minutesToAdd) {
+        // Check for empty or null input
+        if (receivedTime == null || receivedTime.isEmpty()) {
+            throw new IllegalArgumentException("receivedTime cannot be null or empty");
+        }
+
+        // Split the received time into hours and minutes
+        String[] timeParts = receivedTime.split(":");
+        if (timeParts.length != 2) {
+            throw new IllegalArgumentException("receivedTime must be in HH:mm format");
+        }
+
+        // Parse hours and minutes
+        int hours = Integer.parseInt(timeParts[0]);
+        int minutes = Integer.parseInt(timeParts[1]);
+
+        // Validate hours and minutes
+        if (hours < 0 || hours > 23) {
+            throw new IllegalArgumentException("Hours must be between 0 and 23");
+        }
+        if (minutes < 0 || minutes > 59) {
+            throw new IllegalArgumentException("Minutes must be between 0 and 59");
+        }
+
+        // Add minutes to total minutes
+        int totalMinutes = hours * 60 + minutes + minutesToAdd;
+
+        // Calculate new hours and minutes, handling overflow
+        int newHours = (totalMinutes / 60) % 24;
+        int newMinutes = totalMinutes % 60;
+
+        // Format the new time string
+        return String.format("%02d:%02d", newHours, newMinutes);
+    }
+
+
     public static int getHourOfDate(Date date) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);

@@ -33,7 +33,7 @@
         android:layout_height="22sp"
         android:layout_centerVertical="true"
         android:src="@drawable/remove_person"
-        android:layout_marginEnd="200sp"
+        android:layout_marginEnd="100sp"
         app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,12 +13,12 @@
         android:layout_height="wrap_content"
         android:text="מאזין מצוין!"
         android:textSize="50sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/tvStartTime"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.105" />
+        />
 
 
     <TextView
@@ -27,40 +27,37 @@
         android:layout_height="wrap_content"
         android:text="מאיזה שעה מתחילים להאזין?"
         android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/linear1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:layout_constraintVertical_bias="0.089" />
 
+    <LinearLayout
+        android:id="@+id/linear1"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvStartTime"
+        app:layout_constraintBottom_toTopOf="@id/tvEndTime">
+        <TextView
+            android:id="@+id/tvForTime1"
+            android:layout_width="86dp"
+            android:layout_height="42dp"
+            android:layout_marginRight="75dp"
+            android:text="00:00"
+            android:textSize="30sp"
+            />
 
-    <TextView
-        android:id="@+id/tvForTime1"
-        android:layout_width="86dp"
-        android:layout_height="42dp"
-        android:text="00:00"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/tvEndTime"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.315"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvStartTime"
-        app:layout_constraintVertical_bias="0.595" />
-
-
-    <TextView
-        android:id="@+id/tvForTime2"
-        android:layout_width="86dp"
-        android:layout_height="42dp"
-        android:text="00:00"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.312"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvEndTime"
-        app:layout_constraintVertical_bias="0.382" />
-
+        <Button
+            android:id="@+id/pickTime1"
+            android:layout_width="110dp"
+            android:layout_height="50dp"
+            android:onClick="clickTimePicker"
+            android:text="בחר שעה"
+             />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tvEndTime"
@@ -68,36 +65,39 @@
         android:layout_height="wrap_content"
         android:text="עד איזה שעה מאזינים?"
         android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/linear2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.627"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.551" />
+        app:layout_constraintTop_toBottomOf="@id/linear1"
+        />
 
-    <Button
-        android:id="@+id/pickTime1"
-        android:layout_width="110dp"
+    <LinearLayout
+        android:id="@+id/linear2"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:onClick="clickTimePicker"
-        android:text="בחר שעה"
-        app:layout_constraintBottom_toTopOf="@+id/tvEndTime"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvForTime1"
-        app:layout_constraintTop_toBottomOf="@+id/tvStartTime" />
-
-    <Button
-        android:id="@+id/pickTime2"
-        android:layout_width="110dp"
-        android:layout_height="50dp"
-        android:onClick="clickTimePicker"
-        android:text="בחר שעה"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
-        app:layout_constraintStart_toEndOf="@+id/tvForTime2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/button"
         app:layout_constraintTop_toBottomOf="@+id/tvEndTime"
-        app:layout_constraintVertical_bias="0.359" />
+        >
+        <TextView
+            android:id="@+id/tvForTime2"
+            android:layout_width="86dp"
+            android:layout_height="42dp"
+            android:layout_marginRight="75dp"
+            android:text="00:00"
+            android:textSize="30sp"
+            />
+
+        <Button
+            android:id="@+id/pickTime2"
+            android:layout_width="110dp"
+            android:layout_height="50dp"
+            android:onClick="clickTimePicker"
+            android:text="בחר שעה"
+             />
+    </LinearLayout>
+
 
     <Button
         android:id="@+id/button"
@@ -110,7 +110,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.518"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linear2"
         app:layout_constraintVertical_bias="0.877" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

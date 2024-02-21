@@ -3,12 +3,18 @@ package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -21,6 +27,7 @@ public class CalculateShiftsActivity extends AppCompatActivity {
     static ListView shiftsListView;
     static ShiftViewAdapter adapter;
     static ArrayList<String> names;
+    ImageView copyCalculatedShifts;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +57,7 @@ public class CalculateShiftsActivity extends AppCompatActivity {
             if(names.size() == 1){
                 shiftEnding = endingTime; // Final shift
             }
-            shift = shiftBeginning + "-" + shiftEnding + "\t" + names.get(index);
+            shift = shiftBeginning + "-" + shiftEnding + "\t\t" + names.get(index);
             shifts.add(shift);
             names.remove(index);
             shiftBeginning = shiftEnding; // next shift starts when previous ends
@@ -60,6 +67,24 @@ public class CalculateShiftsActivity extends AppCompatActivity {
         adapter = new ShiftViewAdapter(this, shifts);
         shiftsListView.setAdapter(adapter);
 
+        // Copy functionality for the ability to send the shifts in chat
+        copyCalculatedShifts = findViewById(R.id.copy_shifts_image);
+        copyCalculatedShifts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String shiftsText = "";
 
+                for(int i=0; i<shifts.size(); i++){
+                    shiftsText = shiftsText + shifts.get(i) + "\n";
+                }
+
+                // Gets a handle to the clipboard service.
+                ClipboardManager clipboard = (ClipboardManager)getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("text", shiftsText);
+                clipboard.setPrimaryClip(clip);
+                String copyStr = "Copied";
+                Toast.makeText(getApplicationContext(), copyStr, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

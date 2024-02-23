@@ -5,4 +5,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="finish_editing_names_str">Calculate Shifts</string>
     <string name="title_activity_calculate_shifts">CalculateShiftsActivity</string>
+    <string name="spinner_header">Number of watchers</string>
+    <string name="post_description_header">Post</string>
+    <string name="choose_posts_description">What types of posts do you have, and how many watchers do each require?</string>
+    <string name="continue_str">Continue</string>
 </resources>

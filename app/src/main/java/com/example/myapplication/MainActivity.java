@@ -6,7 +6,6 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -32,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         startingTime = tv1.getText().toString();
         endingTime = tv2.getText().toString();
 
-        Intent intent = new Intent(this, ChoosePeopleActivity.class);
+        Intent intent = new Intent(this, ChoosePostsActivity.class);
         intent.putExtra(TIME1_KEY, startingTime);
         intent.putExtra(TIME2_KEY, endingTime);
         startActivity(intent);

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ChoosePostsActivity">
+
+
+    <TextView
+        android:id="@+id/choose_post_activity_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/posts_table"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/choose_posts_description"
+        android:textSize="34sp">
+
+    </TextView>
+
+
+    <TableLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+
+        android:id="@+id/posts_table"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/choose_post_activity_description"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginStart="5dp">
+
+        <TableRow
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent">
+            <TextView
+                android:id="@+id/post_name_header"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_marginEnd="50sp"
+                android:layout_marginStart="10dp"
+                android:gravity="center"
+                android:textSize="@dimen/big_font"
+                android:text="@string/post_description_header">
+
+            </TextView>
+            <TextView
+                android:id="@+id/number_of_night_watchers_header"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:textSize="@dimen/big_font"
+                android:text="@string/spinner_header">
+
+            </TextView>
+
+        </TableRow>
+
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent">
+            <EditText
+                android:id="@+id/post_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/enter_text"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintRight_toLeftOf="@id/number_of_night_watchers"
+                />
+
+            <Spinner
+                android:id="@+id/number_of_night_watchers"
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toRightOf="@id/post_name"
+                android:layout_marginEnd="20dp"
+                android:layout_marginStart="50dp"
+                >
+
+            </Spinner>
+
+            <ImageButton
+                android:id="@+id/add_post_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:layout_gravity="center"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:src="@drawable/add_post"
+                android:background="@drawable/round_corner"
+                >
+            </ImageButton>
+        </TableRow>
+    </TableLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginBottom="20dp"
+        android:text="@string/continue_str"
+        android:textStyle="bold"
+        android:textSize="@dimen/big_font">
+    </Button>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

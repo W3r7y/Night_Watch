@@ -16,13 +16,16 @@
             android:name=".CalculateShiftsActivity"
             android:exported="false"
             android:label="@string/title_activity_calculate_shifts"
-            android:theme="@style/Theme.MyApplication" />
+            android:theme="@style/Theme.MyApplication"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity
             android:name=".ChoosePeopleActivity"
-            android:exported="false" />
+            android:exported="false"
+            />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:configChanges="keyboardHidden|orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

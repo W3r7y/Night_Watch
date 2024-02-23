@@ -16,7 +16,8 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String TIME1_KEY = "com.example.myapplication.TIME1";
     public static final String TIME2_KEY = "com.example.myapplication.TIME2";
-
+    public String startingTime;
+    String endingTime;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,8 +29,8 @@ public class MainActivity extends AppCompatActivity {
         TextView tv1 = (TextView) findViewById(R.id.tvForTime1);
         TextView tv2 = (TextView) findViewById(R.id.tvForTime2);
 
-        String startingTime = tv1.getText().toString();
-        String endingTime = tv2.getText().toString();
+        startingTime = tv1.getText().toString();
+        endingTime = tv2.getText().toString();
 
         Intent intent = new Intent(this, ChoosePeopleActivity.class);
         intent.putExtra(TIME1_KEY, startingTime);
@@ -60,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
             public void onTimeSet(TimePicker view, int hour, int minute) {
                 // Set time to the selected text view
                 TextView tv = findViewById(textViewId);
-                tv.setText(timeToString(hour, minute));
+                tv.setText(TimeUtils.timeToString(hour, minute));
             }
         }, hour, min, true);
 
@@ -68,25 +69,33 @@ public class MainActivity extends AppCompatActivity {
         timePicker.show();
     }
 
-    public String timeToString(int hours, int minutes){
-        String time = "";
-        String hourStr = "";
-        String minuteStr = "";
+    /*
+    //Making sure that the data is not lost while user rotates the screen
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
 
-        if(hours < 10){
-            hourStr = "0" + hours;
-        }else{
-            hourStr = "" + hours;
-        }
-        if(minutes < 10){
-            minuteStr = "0" + minutes;
-        }else{
-            minuteStr = "" + minutes;
-        }
+        // Save UI state changes to the savedInstanceState.
+        // This bundle will be passed to onCreate if the process is
+        // killed and restarted.
 
-        time = hourStr + ":" + minuteStr;
-        return time;
+        savedInstanceState.putString(TIME1_KEY, startingTime);
+        savedInstanceState.putString(TIME2_KEY, endingTime);
+
+        super.onSaveInstanceState(savedInstanceState);
     }
 
-    //Check
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+
+        super.onRestoreInstanceState(savedInstanceState);
+
+        // Restore UI state from the savedInstanceState.
+        // This bundle has also been passed to onCreate.
+
+        startingTime = savedInstanceState.getString(TIME1_KEY);
+        endingTime = savedInstanceState.getString(TIME2_KEY);
+    }
+
+     */
 }

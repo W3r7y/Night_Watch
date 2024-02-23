@@ -51,7 +51,10 @@ public class ChoosePeopleActivity extends AppCompatActivity {
         input = findViewById(R.id.input);
         add = findViewById(R.id.add);
 
-        names = new ArrayList<>();
+        if(savedInstanceState == null){
+            names = new ArrayList<>();
+        }
+
         adapter = new ListViewAdapter(getApplicationContext(), names);
         listView.setAdapter(adapter);
 
@@ -121,6 +124,36 @@ public class ChoosePeopleActivity extends AppCompatActivity {
         intent.putExtra(NAMES_KEY, names);
         startActivity(intent);
 
+    }
+
+    //Making sure that the data is not lost while user rotates the screen
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+
+        // Save UI state changes to the savedInstanceState.
+        // This bundle will be passed to onCreate if the process is
+        // killed and restarted.
+
+        savedInstanceState.putSerializable(NAMES_KEY, names);
+
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+
+        // Restore UI state from the savedInstanceState.
+        // This bundle has also been passed to onCreate.
+
+        if (savedInstanceState != null) {
+            names = (ArrayList<String>) savedInstanceState.getSerializable(NAMES_KEY);
+            ListViewAdapter adapter = new ListViewAdapter(this, names);
+            ListView listView = (ListView) findViewById(R.id.list_view);
+            listView.setAdapter(adapter);
+        }
+
+        super.onRestoreInstanceState(savedInstanceState);
     }
 
 }

@@ -97,4 +97,24 @@ public class TimeUtils {
         return calendar.get(Calendar.MINUTE);
     }
 
+    public static String timeToString(int hours, int minutes){
+        String time = "";
+        String hourStr = "";
+        String minuteStr = "";
+
+        if(hours < 10){
+            hourStr = "0" + hours;
+        }else{
+            hourStr = "" + hours;
+        }
+        if(minutes < 10){
+            minuteStr = "0" + minutes;
+        }else{
+            minuteStr = "" + minutes;
+        }
+
+        time = hourStr + ":" + minuteStr;
+        return time;
+    }
+
 }

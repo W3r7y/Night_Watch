@@ -1,6 +1,8 @@
 package com.example.myapplication;
 
-public class Post {
+import java.io.Serializable;
+
+public class Post implements Serializable {
     String post_type;
     int number_of_watchers;
 

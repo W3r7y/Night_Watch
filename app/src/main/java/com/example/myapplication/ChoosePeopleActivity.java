@@ -35,8 +35,8 @@ public class ChoosePeopleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_choose_people);
 
         Intent intent = getIntent();
-        startingTime = intent.getStringExtra(MainActivity.TIME1_KEY);
-        endingTime = intent.getStringExtra(MainActivity.TIME2_KEY);
+        startingTime = intent.getStringExtra(ChoosePostsActivity.TIME1_KEY);
+        endingTime = intent.getStringExtra(ChoosePostsActivity.TIME2_KEY);
 
         TextView textView = (TextView) findViewById(R.id.time_difference_tv);
         textView.setText("Total time: " + TimeUtils.calculateDifferenceBetweenTime(startingTime, endingTime));

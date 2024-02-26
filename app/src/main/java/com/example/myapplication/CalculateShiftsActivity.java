@@ -19,6 +19,8 @@ import android.widget.Toast;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 import java.util.Date;
 
@@ -27,7 +29,9 @@ public class CalculateShiftsActivity extends AppCompatActivity {
     static ListView shiftsListView;
     static ShiftViewAdapter adapter;
     static ArrayList<String> names;
+    static ArrayList<Post> posts;
     ImageView copyCalculatedShifts;
+    static ArrayList<String> shifts;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,30 +42,41 @@ public class CalculateShiftsActivity extends AppCompatActivity {
         String startingTime = intent.getStringExtra(ChoosePeopleActivity.TIME1_KEY);
         String endingTime = intent.getStringExtra(ChoosePeopleActivity.TIME2_KEY);
         names = intent.getStringArrayListExtra(ChoosePeopleActivity.NAMES_KEY);
+        posts = (ArrayList<Post>) intent.getSerializableExtra(ChoosePeopleActivity.POSTS_KEY);
+        shifts = new ArrayList<>();
 
-        String timeDifference = TimeUtils.calculateDifferenceBetweenTime(startingTime, endingTime);
-        int minutes_per_shift = TimeUtils.calculateShiftTimeInMinnutes(timeDifference, names.size());
+        Collections.shuffle(names);
+
+        List<ArrayList<String>> subLists = splitArrayList(names, posts);
+
+        String shiftBeginning = startingTime;
+        for(int i=0; i < subLists.size(); i++){
+            String shiftName = posts.get(i).getPostType();
+            shifts.add(shiftName);
+
+            String timeDifference = TimeUtils.calculateDifferenceBetweenTime(startingTime, endingTime);
+            int minutes_per_shift = TimeUtils.calculateShiftTimeInMinnutes(
+                    timeDifference, Math.round(subLists.get(i).size() / posts.get(i).getNumberOfWatchers()));
+
+            int count = 0;
+
+            while(subLists.get(i).size() != count &&
+                    subLists.get(i).size() > count){
+
+                String shiftEnding = TimeUtils.addMinutesToTime(shiftBeginning, minutes_per_shift);
+                StringBuilder shift = new StringBuilder(shiftBeginning + "-" + shiftEnding + "\t\t");
+                for(int j=count; j - count< posts.get(i).getNumberOfWatchers() ; j++ ){
+                    shift.append(subLists.get(i).get(j)).append(" \t");
+                }
+                shifts.add(shift.toString());
+                shiftBeginning = shiftEnding;
+                count += posts.get(i).getNumberOfWatchers();
+            }
+        }
 
         TextView textView = (TextView) findViewById(R.id.shifts_tv);
-        textView.setText("Shift duration: " + minutes_per_shift + " minutes");
+        textView.setText("Shifts");
 
-        Random rand = new Random();
-        ArrayList<String> shifts = new ArrayList<>();
-        String shiftBeginning = startingTime;
-
-        while(names.size() != 0){
-            String shift = "";
-            int index = rand.nextInt(names.size());
-            String shiftEnding = TimeUtils.addMinutesToTime(shiftBeginning, minutes_per_shift);
-
-            if(names.size() == 1){
-                shiftEnding = endingTime; // Final shift
-            }
-            shift = shiftBeginning + "-" + shiftEnding + "\t\t" + names.get(index);
-            shifts.add(shift);
-            names.remove(index);
-            shiftBeginning = shiftEnding; // next shift starts when previous ends
-        }
 
         shiftsListView = findViewById(R.id.shifts_list_view);
         adapter = new ShiftViewAdapter(this, shifts);
@@ -86,5 +101,24 @@ public class CalculateShiftsActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), copyStr, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private static <T> List<ArrayList<T>> splitArrayList(ArrayList<T> original, ArrayList<Post> posts) {
+        List<ArrayList<T>> subLists = new ArrayList<>();
+
+        int total_watchers_in_paralel = 0;
+        for(int i=0; i < posts.size(); i++){
+            total_watchers_in_paralel += posts.get(i).getNumberOfWatchers();
+        }
+
+        for (int i = 0; i < original.size(); i += Math.round(original.size() *
+                (posts.get(i).getNumberOfWatchers() / total_watchers_in_paralel))) {
+            int end = Math.min(i + Math.round(original.size() *
+                            (posts.get(i).number_of_watchers / total_watchers_in_paralel)),
+                    original.size());
+            subLists.add(new ArrayList<>(original.subList(i, end)));
+        }
+
+        return subLists;
     }
 }

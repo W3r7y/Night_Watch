@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 public class ChoosePostsActivity extends AppCompatActivity {
 
-    public static final String POSTS_KEY = "com.example.myapplication.PSTS";
+    public static final String POSTS_KEY = "com.example.myapplication.POSTS";
     public static final String TIME1_KEY = "com.example.myapplication.TIME1";
     public static final String TIME2_KEY = "com.example.myapplication.TIME2";
     static ArrayList<Post> posts;

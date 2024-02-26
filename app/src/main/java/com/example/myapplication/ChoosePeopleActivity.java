@@ -19,12 +19,14 @@ public class ChoosePeopleActivity extends AppCompatActivity {
     public static final String NAMES_KEY = "com.example.myapplication.NAMES";
     public static final String TIME1_KEY = "com.example.myapplication.TIME1";
     public static final String TIME2_KEY = "com.example.myapplication.TIME2";
+    public static final String POSTS_KEY = "com.example.myapplication.POSTS";
 
     static ListView listView;
     static ArrayList<String> names;
     static ListViewAdapter adapter;
     static String startingTime;
     static String endingTime;
+    static ArrayList<Post> posts;
     EditText input;
     ImageView add;
 
@@ -37,6 +39,7 @@ public class ChoosePeopleActivity extends AppCompatActivity {
         Intent intent = getIntent();
         startingTime = intent.getStringExtra(ChoosePostsActivity.TIME1_KEY);
         endingTime = intent.getStringExtra(ChoosePostsActivity.TIME2_KEY);
+        posts = (ArrayList<Post>) intent.getSerializableExtra(ChoosePostsActivity.POSTS_KEY);
 
         TextView textView = (TextView) findViewById(R.id.time_difference_tv);
         textView.setText("Total time: " + TimeUtils.calculateDifferenceBetweenTime(startingTime, endingTime));
@@ -116,6 +119,7 @@ public class ChoosePeopleActivity extends AppCompatActivity {
         intent.putExtra(TIME1_KEY, startingTime);
         intent.putExtra(TIME2_KEY, endingTime);
         intent.putExtra(NAMES_KEY, names);
+        intent.putExtra(POSTS_KEY, posts);
         startActivity(intent);
 
     }

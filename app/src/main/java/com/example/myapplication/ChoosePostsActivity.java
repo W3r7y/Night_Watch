@@ -41,7 +41,7 @@ public class ChoosePostsActivity extends AppCompatActivity {
         spinner.setAdapter(adapter);
 
         posts = new ArrayList<>();
-        Post generated_post = new Post();
+        /*
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
@@ -52,7 +52,7 @@ public class ChoosePostsActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parentView) {
                 // make a joke
             }
-        });
+        });*/
 
         count = 0; //initialization
 
@@ -60,8 +60,10 @@ public class ChoosePostsActivity extends AppCompatActivity {
         addPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Post generated_post = new Post();
                 String post_desc = editText.getText().toString();
                 generated_post.setPostType(post_desc);
+                generated_post.setNumberOfWatchers((int)spinner.getSelectedItem());
                 if (generated_post.getPostType() == null || generated_post.getNumberOfWatchers() == 0) {
                     Toast.makeText(getApplicationContext(), "Missing parameters", Toast.LENGTH_SHORT).show();
                 }
@@ -102,6 +104,7 @@ public class ChoosePostsActivity extends AppCompatActivity {
                     // Toast informing message
                     Toast.makeText(getApplicationContext(), "Post added", Toast.LENGTH_SHORT).show();
                 }
+                editText.setText("");
             }
         });
 

@@ -47,36 +47,53 @@ public class CalculateShiftsActivity extends AppCompatActivity {
 
         Collections.shuffle(names);
 
-        List<ArrayList<String>> subLists = splitArrayList(names, posts);
+        int total_watchers_in_paralel = 0;
+        for(int i=0; i < posts.size(); i++){
+            total_watchers_in_paralel += posts.get(i).getNumberOfWatchers();
+        }
 
-        String shiftBeginning = startingTime;
-        for(int i=0; i < subLists.size(); i++){
-            String shiftName = posts.get(i).getPostType();
-            shifts.add(shiftName);
+        int number_of_shifts = names.size() % total_watchers_in_paralel == 0 ?
+                (names.size() / total_watchers_in_paralel) : (names.size() / total_watchers_in_paralel) + 1;
 
-            String timeDifference = TimeUtils.calculateDifferenceBetweenTime(startingTime, endingTime);
-            int minutes_per_shift = TimeUtils.calculateShiftTimeInMinnutes(
-                    timeDifference, Math.round(subLists.get(i).size() / posts.get(i).getNumberOfWatchers()));
+        String timeDifference = TimeUtils.calculateDifferenceBetweenTime(startingTime, endingTime);
 
-            int count = 0;
+        int minutes_per_shift = TimeUtils.calculateShiftTimeInMinnutes(
+                timeDifference, number_of_shifts);
 
-            while(subLists.get(i).size() != count &&
-                    subLists.get(i).size() > count){
+        List<ArrayList<String>> subLists = splitArrayList(names, total_watchers_in_paralel);
 
+        // complete all shift to number of watcher in parallel
+        for (ArrayList<String> list : subLists){
+            if(list.size() < total_watchers_in_paralel){
+                while(list.size() < total_watchers_in_paralel){
+                    list.add("???");
+                }
+            }
+        }
+
+
+        for(int i = 0, count = 0; i < posts.size(); i++){
+            shifts.add(posts.get(i).getPostType()); // Add post type as a row
+
+            String shiftBeginning = startingTime;
+            for(int j = 0; j < number_of_shifts; j++){
                 String shiftEnding = TimeUtils.addMinutesToTime(shiftBeginning, minutes_per_shift);
                 StringBuilder shift = new StringBuilder(shiftBeginning + "-" + shiftEnding + "\t\t");
-                for(int j=count; j - count< posts.get(i).getNumberOfWatchers() ; j++ ){
-                    shift.append(subLists.get(i).get(j)).append(" \t");
+
+
+                for(int k=0; k < posts.get(i).getNumberOfWatchers(); k++){
+                    shift.append(subLists.get(j).get(count+k)).append(" \t");
                 }
+
                 shifts.add(shift.toString());
                 shiftBeginning = shiftEnding;
-                count += posts.get(i).getNumberOfWatchers();
             }
+            count += posts.get(i).getNumberOfWatchers();
+
         }
 
         TextView textView = (TextView) findViewById(R.id.shifts_tv);
         textView.setText("Shifts");
-
 
         shiftsListView = findViewById(R.id.shifts_list_view);
         adapter = new ShiftViewAdapter(this, shifts);
@@ -103,19 +120,12 @@ public class CalculateShiftsActivity extends AppCompatActivity {
         });
     }
 
-    private static <T> List<ArrayList<T>> splitArrayList(ArrayList<T> original, ArrayList<Post> posts) {
+    private static <T> List<ArrayList<T>> splitArrayList(ArrayList<T> original, int size) {
         List<ArrayList<T>> subLists = new ArrayList<>();
 
-        int total_watchers_in_paralel = 0;
-        for(int i=0; i < posts.size(); i++){
-            total_watchers_in_paralel += posts.get(i).getNumberOfWatchers();
-        }
+        for (int i = 0; i < original.size() ; i += size) {
 
-        for (int i = 0; i < original.size(); i += Math.round(original.size() *
-                (posts.get(i).getNumberOfWatchers() / total_watchers_in_paralel))) {
-            int end = Math.min(i + Math.round(original.size() *
-                            (posts.get(i).number_of_watchers / total_watchers_in_paralel)),
-                    original.size());
+            int end = Math.min(i + size, original.size());
             subLists.add(new ArrayList<>(original.subList(i, end)));
         }
 

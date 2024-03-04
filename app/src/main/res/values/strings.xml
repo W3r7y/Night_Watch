@@ -9,4 +9,5 @@
     <string name="post_description_header">Post</string>
     <string name="choose_posts_description">What types of posts do you have, and how many watchers do each require?</string>
     <string name="continue_str">Continue</string>
+    <string name="welcoming_str">Welcome to Night Watchers App!</string>
 </resources>

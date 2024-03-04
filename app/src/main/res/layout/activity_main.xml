@@ -7,110 +7,123 @@
     tools:context=".MainActivity">
 
 
+
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/welcoming_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="מאזין מצוין!"
-        android:textSize="50sp"
-        android:layout_marginBottom="25dp"
-        app:layout_constraintBottom_toTopOf="@+id/tvStartTime"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/welcoming_str"
+        android:textSize="40sp"
+        android:layout_margin="20sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center"
         />
 
-
-    <TextView
-        android:id="@+id/tvStartTime"
+    <LinearLayout
+        android:id="@+id/linear_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="מאיזה שעה מתחילים להאזין?"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/linear1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.089" />
-
-    <LinearLayout
-        android:id="@+id/linear1"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvStartTime"
-        app:layout_constraintBottom_toTopOf="@id/tvEndTime">
+        app:layout_constraintTop_toBottomOf="@+id/welcoming_tv">
+
         <TextView
-            android:id="@+id/tvForTime1"
-            android:layout_width="86dp"
-            android:layout_height="42dp"
-            android:layout_marginRight="75dp"
-            android:text="00:00"
-            android:textSize="30sp"
+            android:id="@+id/email_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email:"
+            android:textSize="20sp"
+            android:layout_marginTop="50dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:hint="Enter your email"
+            android:textSize="20sp"
+            android:layout_marginLeft="10sp"
             />
 
-        <Button
-            android:id="@+id/pickTime1"
-            android:layout_width="110dp"
-            android:layout_height="50dp"
-            android:onClick="clickTimePicker"
-            android:text="בחר שעה"
-             />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tvEndTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="עד איזה שעה מאזינים?"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/linear2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/linear1"
-        />
 
     <LinearLayout
-        android:id="@+id/linear2"
+        android:id="@+id/linear_password"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_height="wrap_content"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/button"
-        app:layout_constraintTop_toBottomOf="@+id/tvEndTime"
-        >
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linear_email">
+
         <TextView
-            android:id="@+id/tvForTime2"
-            android:layout_width="86dp"
-            android:layout_height="42dp"
-            android:layout_marginRight="75dp"
-            android:text="00:00"
-            android:textSize="30sp"
+            android:id="@+id/password_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Password:"
+            android:textSize="20sp"
+            android:layout_marginTop="50dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:hint="Enter your password"
+            android:textSize="20sp"
+            android:layout_marginLeft="10sp"
+
             />
 
-        <Button
-            android:id="@+id/pickTime2"
-            android:layout_width="110dp"
-            android:layout_height="50dp"
-            android:onClick="clickTimePicker"
-            android:text="בחר שעה"
-             />
     </LinearLayout>
 
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="המשך"
-        android:onClick="buttonClick"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.518"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/linear2"
-        app:layout_constraintVertical_bias="0.877" />
+        android:text="Login"
+        app:layout_constraintTop_toBottomOf="@+id/linear_password"
+        app:layout_constraintRight_toLeftOf="@id/signup_button"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="50dp"
+        />
+
+    <Button
+        android:id="@+id/signup_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign up"
+        app:layout_constraintTop_toBottomOf="@+id/linear_password"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/login_button"
+        android:layout_marginTop="50dp"
+        />
+
+    <Button
+        android:id="@+id/login_with_google_bottun"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login with Google"
+        app:layout_constraintTop_toBottomOf="@+id/login_button"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="50dp"
+        />
+
+    <Button
+        android:id="@+id/continue_without_login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Continue wothout login"
+        app:layout_constraintTop_toBottomOf="@+id/login_with_google_bottun"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="50dp"
+        android:onClick="continue_wothout_login_click"
+        />
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

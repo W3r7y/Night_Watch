@@ -13,20 +13,6 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
-            android:name=".ChoosePostsActivity"
-            android:exported="false"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
-        <activity
-            android:name=".CalculateShiftsActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:exported="false"
-            android:label="@string/title_activity_calculate_shifts"
-            android:theme="@style/Theme.MyApplication" />
-        <activity
-            android:name=".ChoosePeopleActivity"
-            android:exported="false"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
-        <activity
             android:name=".MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true">
@@ -35,6 +21,25 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".ChoosePostsActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="false" />
+        <activity
+            android:name=".CalculateShiftsActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="false"
+            android:label="@string/title_activity_calculate_shifts"
+            android:theme="@style/Theme.MyApplication" />
+        <activity
+            android:name=".ChoosePeopleActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="false" />
+        <activity
+            android:name=".PickTimeActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="false">
         </activity>
     </application>
 

@@ -49,13 +49,6 @@ android {
     }
 }
 
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
-
 dependencies {
 
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -75,4 +68,16 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    //Google
+    implementation("com.google.android.material:material:1.11.0")
+
+    //Retrofit
+    implementation("com.squareup.retrofit2:adapter-rxjava2:2.3.0")
+    implementation("com.squareup.retrofit2:converter-scalars:2.3.0")
+
+    //RX java
+    implementation("io.reactivex.rxjava3:rxandroid:3.0.2")
+    implementation("io.reactivex.rxjava3:rxjava:3.1.8")
+
 }

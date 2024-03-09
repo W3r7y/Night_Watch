@@ -3,10 +3,8 @@ package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -114,8 +112,8 @@ public class ChoosePostsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = getIntent();
-                time1 = intent.getStringExtra(MainActivity.TIME1_KEY);
-                time2 = intent.getStringExtra(MainActivity.TIME2_KEY);
+                time1 = intent.getStringExtra(PickTimeActivity.TIME1_KEY);
+                time2 = intent.getStringExtra(PickTimeActivity.TIME2_KEY);
                 Intent newIntent = new Intent(getApplicationContext(), ChoosePeopleActivity.class);
                 newIntent.putExtra(POSTS_KEY, posts);
                 newIntent.putExtra(TIME1_KEY, time1);

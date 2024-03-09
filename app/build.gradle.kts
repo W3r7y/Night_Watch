@@ -52,7 +52,6 @@ android {
 dependencies {
 
     implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
     implementation("androidx.activity:activity-compose:1.8.2")
@@ -68,4 +67,19 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    //Google
+    implementation("com.google.android.material:material:1.11.0")
+
+    //Retrofit
+    implementation("com.squareup.retrofit2:adapter-rxjava2:2.3.0")
+    implementation("com.squareup.retrofit2:converter-scalars:2.3.0")
+
+    //RX java
+    implementation("io.reactivex.rxjava2:rxandroid:2.0.1")
+    implementation("io.reactivex.rxjava2:rxjava:2.2.20")
+
+    // Material Styled dialog
+    implementation ("com.github.javiersantos:MaterialStyledDialogs:2.1")
+
 }

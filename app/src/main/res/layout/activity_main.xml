@@ -36,7 +36,7 @@
         android:layout_marginHorizontal="5dp"
         />
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/text_input_email"
+
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         app:layout_constraintTop_toBottomOf="@+id/welcoming_tv"
@@ -44,10 +44,11 @@
         >
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/text_input_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter your Email"
-            android:inputType="textPassword"
+            android:hint="@string/email_address"
+            android:inputType="textEmailAddress"
 
         />
     </com.google.android.material.textfield.TextInputLayout>
@@ -71,16 +72,17 @@
         />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/text_input_password"
+
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         app:endIconMode="password_toggle"
         >
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/text_input_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter your password"
+            android:hint="@string/password"
             android:inputType="textPassword"
             />
 
@@ -129,7 +131,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="50dp"
-        android:onClick="continue_wothout_login_click"
+        android:onClick="continue_without_login_click"
         />
 
 

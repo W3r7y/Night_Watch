@@ -10,4 +10,10 @@
     <string name="choose_posts_description">What types of posts do you have, and how many watchers do each require?</string>
     <string name="continue_str">Continue</string>
     <string name="welcoming_str">Welcome to Night Watchers App!</string>
+    <string name="email_address">Email address</string>
+    <string name="password">Password</string>
+    <string name="enter_name">Name</string>
+
+    <string name="registration_title">REGISTRATION</string>
+    <string name="registration_description">Please fill all the fields</string>
 </resources>

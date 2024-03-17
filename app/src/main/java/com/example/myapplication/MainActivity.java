@@ -16,6 +16,8 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
 import com.google.android.material.textfield.TextInputEditText;
 
+import org.json.JSONObject;
+
 import Retrofit.IMyService;
 import Retrofit.RetrofitClient;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -152,7 +154,13 @@ public class MainActivity extends AppCompatActivity {
                 .subscribe(new Consumer<String>() {  // Success handler (existing code)
                     @Override
                     public void accept(String response) throws Exception {
-                        Toast.makeText(MainActivity.this, "" + response, Toast.LENGTH_SHORT).show();
+                        JSONObject jsonObj = new JSONObject(response);
+                        Toast.makeText(MainActivity.this, "" + jsonObj.getString("message"), Toast.LENGTH_SHORT).show();
+
+                        if(jsonObj.getString("message").equals("Login successful!")){
+                            Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                            startActivity(intent);
+                        }
                     }
                 }, new Consumer<Throwable>() {  // Error handler (added)
                     @Override

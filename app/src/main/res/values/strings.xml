@@ -16,4 +16,6 @@
 
     <string name="registration_title">REGISTRATION</string>
     <string name="registration_description">Please fill all the fields</string>
+    <string name="make_shifts_btn_text">Make Shifts</string>
+    <string name="my_groups_btn_text">My Groups</string>
 </resources>

@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
 
     TextInputEditText edit_login_email, edit_login_password ;
     Button btn_login;
-
     Button btn_signup;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     IMyService iMyService;

@@ -18,4 +18,9 @@
     <string name="registration_description">Please fill all the fields</string>
     <string name="make_shifts_btn_text">Make Shifts</string>
     <string name="my_groups_btn_text">My Groups</string>
+    <string name="groups_layout_heading">Your groups</string>
+    <string name="group_button_text">Add Group</string>
+
+    <string name="groups_title">My Groups</string>
+    <string name="groups_description">See or manage your groups of watches.</string>
 </resources>
